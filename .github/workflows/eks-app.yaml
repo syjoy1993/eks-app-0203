@@ -78,5 +78,9 @@ jobs:
           git config --local user.email "${{ secrets.G_USER_EMAIL }}"
           git config --local user.name "${{ secrets.G_USER }}"
           git add .
+          if ! git diff-index --quiet HEAD --; then
           git commit -m "Update application image version for ArgoCD"
           git push
+          else
+          echo "변경사항이 없어 커밋 및 푸시를 건너뜁니다."
+          fi
